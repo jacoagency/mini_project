@@ -1,0 +1,36 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover, a:active {
+    color: #e0e0e0;
+}
+
+.navigation-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navbar {
+    display: flex;
+    flex-grow: 1;
+}
+
+mat-toolbar {
+    background-color: #c03059;
+    border-radius: 3px;
+}
+
+li {
+    padding: 0 15px;
+    border-right: 1px solid #fff;
+}
+
+@media(max-width: 959px) {
+    mat-toolbar {
+        border-radius: 0px;
+    }
+}
