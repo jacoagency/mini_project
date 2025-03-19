@@ -10,13 +10,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './side-nav.component.css'
 })
 export class SideNavComponent implements OnInit {
-  @Output() sidenavClose = new EventEmitter();
+  @Output() sidenavClose = new EventEmitter<void>();
   
   constructor() {}
   
   ngOnInit(): void {}
   
-  onSidenavClose() {
+  onClose() {
     this.sidenavClose.emit();
   }
 }

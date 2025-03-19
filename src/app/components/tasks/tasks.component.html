@@ -1,1 +1,57 @@
-<p>tasks works!</p>
+<div class="box">
+  <mat-card-content>
+    <form class="my-form" [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+      <h2>Add New Task</h2>
+      <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" name="title" id="title" formControlName="title" required>
+        <mat-error *ngIf="title.invalid && title.errors?.['required']">Title is required</mat-error>
+        <mat-error *ngIf="title.invalid && title.errors?.['minlength']">Title must be at least 5 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Description" name="description" id="description" formControlName="description" required>
+        <mat-error *ngIf="description.invalid && description.errors?.['required']">Description is required</mat-error>
+        <mat-error *ngIf="description.invalid && description.errors?.['minlength']">Description must be at least 5 characters</mat-error>
+      </mat-form-field>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" class="buttonSubmit" (click)="addTask()" [disabled]="addTaskForm.invalid">
+          Add Task
+        </button>
+      </mat-card-actions>
+      <div *ngIf="showMessage">
+        <h3 style="color: blue;">Task added!</h3>
+      </div>
+    </form>
+  </mat-card-content>
+</div>
+
+<div class="content-wrapper">
+  <div class="container-wrapper">
+    <div class="container">
+      <h2>Backlog</h2>
+      <mat-card cdkDropList id="todo" #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
+        <p class="empty-label" *ngIf="todo.length === 0">Empty list</p>
+        <app-task (delete)="deleteIt('todo', $event)" (edit)="editTask('todo', $event)" *ngFor="let task of todo" cdkDrag [task]="task"></app-task>
+      </mat-card>
+    </div>
+
+    <div class="container">
+      <h2>In Progress</h2>
+      <mat-card cdkDropList id="inProgress" #inProgressList="cdkDropList" [cdkDropListData]="inProgress" [cdkDropListConnectedTo]="[todoList, doneList]" (cdkDropListDropped)="drop($event)" class="list">
+        <p class="empty-label" *ngIf="inProgress.length === 0">Empty list</p>
+        <app-task (delete)="deleteIt('inProgress', $event)" (edit)="editTask('inProgress', $event)" *ngFor="let task of inProgress" cdkDrag [task]="task"></app-task>
+      </mat-card>
+    </div>
+
+    <div class="container">
+      <h2>Done</h2>
+      <mat-card cdkDropList id="done" #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList, inProgressList]" (cdkDropListDropped)="drop($event)" class="list">
+        <p class="empty-label" *ngIf="done.length === 0">Empty list</p>
+        <app-task (delete)="deleteIt('done', $event)" (edit)="editTask('done', $event)" *ngFor="let task of done" cdkDrag [task]="task"></app-task>
+      </mat-card>
+    </div>
+  </div>
+</div>

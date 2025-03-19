@@ -1,0 +1,76 @@
+.content-wrapper {
+  max-width: 1400px;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.container-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.container {
+  width: 350px;
+  margin: 0 15px 25px 0;
+}
+
+.list {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  border-radius: 4px;
+  padding: 10px;
+  background: white;
+}
+
+.empty-label {
+  font-size: 1.5em;
+  padding-top: 10px;
+  text-align: center;
+  opacity: 0.3;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms;
+}
+
+.box {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+mat-card-content {
+  padding: 20px;
+}
+
+.my-form {
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #3f51b5;
+}
+
+.mat-card {
+  margin-bottom: 10px;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+button.buttonSubmit {
+  margin-top: 10px;
+}

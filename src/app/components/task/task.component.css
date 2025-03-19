@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.item {
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 15px;
+  position: relative;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+p {
+  margin-bottom: 30px;
+  color: #666;
+}
+
+button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
