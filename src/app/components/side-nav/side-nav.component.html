@@ -3,21 +3,21 @@
     <mat-icon>home</mat-icon>
     <span class="nav-caption">Home</span>
   </a>
-  <a mat-list-item routerLink="/tasks" (click)="onClose()">
-    <mat-icon>assignment</mat-icon>
-    <span class="nav-caption">Tasks</span>
+  <a mat-list-item routerLink="/owner" (click)="onClose()">
+    <mat-icon>assignment_ind</mat-icon>
+    <span class="nav-caption">Invoices</span>
   </a>
-  <a mat-list-item routerLink="/about" (click)="onClose()">
-    <mat-icon>info</mat-icon>
-    <span class="nav-caption">About</span>
+  <a mat-list-item routerLink="#" (click)="onClose()">
+    <mat-icon>account_balance</mat-icon>
+    <span class="nav-caption">Add product</span>
   </a>
-  <mat-divider></mat-divider>
-  <a mat-list-item routerLink="/login" (click)="onClose()">
-    <mat-icon>login</mat-icon>
-    <span class="nav-caption">Login</span>
-  </a>
-  <a mat-list-item routerLink="/register" (click)="onClose()">
-    <mat-icon>person_add</mat-icon>
-    <span class="nav-caption">Register</span>
-  </a>
+  <mat-list-item [matMenuTriggerFor]="menu">
+    <mat-icon>unfold_more</mat-icon>
+    <span class="nav-caption">profile</span>
+  </mat-list-item>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onClose()">profile</button>
+    <button mat-menu-item (click)="onClose()">contacts</button>
+    <button mat-menu-item (click)="onClose()">Logout</button>
+  </mat-menu>
 </mat-nav-list>

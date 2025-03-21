@@ -7,3 +7,34 @@ a {
     display: inline-block;
     padding-left: 16px;
 }
+
+mat-list-item {
+    cursor: pointer;
+}
+
+mat-list-item mat-icon {
+    margin-left: 4px;
+    margin-right: 12px;
+}
+
+mat-nav-list {
+    padding-top: 0;
+}
+
+.mat-menu-content {
+    padding: 8px 0 !important;
+}
+
+::ng-deep .mat-menu-panel {
+    min-width: 170px !important;
+    border-radius: 4px !important;
+}
+
+::ng-deep .mat-menu-content {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-menu-item {
+    line-height: 40px !important;
+    height: 40px !important;
+}
