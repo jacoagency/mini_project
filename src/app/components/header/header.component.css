@@ -7,6 +7,40 @@ a:hover, a:active {
     color: #e0e0e0;
 }
 
+mat-toolbar {
+    background-color: #4a5f44;
+    padding: 0 30px;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.logo-image {
+    height: 32px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.middle-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
 .navigation-items {
     list-style: none;
     padding: 0;
@@ -14,23 +48,24 @@ a:hover, a:active {
     display: flex;
 }
 
-.navbar {
-    display: flex;
-    flex-grow: 1;
-}
-
-mat-toolbar {
-    background-color: #c03059;
-    border-radius: 3px;
-}
-
 li {
     padding: 0 15px;
-    border-right: 1px solid #fff;
 }
 
-@media(max-width: 959px) {
-    mat-toolbar {
-        border-radius: 0px;
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.auth-button {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+@media(max-width: 767px) {
+    .middle-section {
+        display: none;
     }
 }

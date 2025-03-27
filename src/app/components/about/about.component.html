@@ -1,0 +1,16 @@
+<div class="about-container">
+  <h1 class="about-title">About us</h1>
+
+  <div class="team-container">
+    <div class="team-member" *ngFor="let member of teamMembers">
+      <div class="member-image">
+        <img [src]="member.image" [alt]="member.name" onError="this.src='assets/default-avatar.png'">
+      </div>
+      <div class="member-info">
+        <h2 class="member-name">{{ member.name }}</h2>
+        <p class="member-role">{{ member.role }}</p>
+        <p class="member-description">{{ member.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,8 @@ import { TaskComponent } from '../task/task.component';
 export class TasksComponent implements OnInit {
   showMessage = false;
   submitted = false;
+  showForm = false;
+  
   todo: Task[] = [
     {
       title: 'Buy milk',

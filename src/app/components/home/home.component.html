@@ -1,1 +1,25 @@
-<p>home works!</p>
+<!-- Mostrar la pantalla de bienvenida cuando NO está autenticado -->
+<div class="home-container" *ngIf="!(isLoggedIn$ | async)">
+  <div class="content">
+    <div class="illustration">
+      <img src="assets/KANBAN.png" alt="Kanban board illustration" width="500" height="350">
+    </div>
+    <div class="welcome-text">
+      <h1>Welcome to</h1>
+      <div class="green-boxes">
+        <div class="green-box"></div>
+        <div class="green-box"></div>
+      </div>
+      <div class="kanban-title">KANBAN</div>
+      <div class="bottom-buttons">
+        <a routerLink="/register" class="btn register-btn">Register</a>
+        <a routerLink="/login" class="btn login-btn">Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mostrar el componente Tasks cuando está autenticado -->
+<div *ngIf="isLoggedIn$ | async">
+  <app-tasks></app-tasks>
+</div>

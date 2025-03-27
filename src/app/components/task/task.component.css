@@ -3,25 +3,54 @@
 }
 
 .item {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   cursor: pointer;
-  padding: 15px;
+  padding: 10px;
   position: relative;
 }
 
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 h2 {
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
   color: #333;
+  flex: 1;
 }
 
 p {
-  margin-bottom: 30px;
+  margin: 5px 0;
+  font-size: 14px;
   color: #666;
 }
 
+.task-actions {
+  text-align: right;
+}
+
 button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+}
+
+button mat-icon {
+  font-size: 16px;
+  line-height: 16px;
+  height: 16px;
+  width: 16px;
+}
+
+.edit-button {
+  opacity: 0.6;
+}
+
+.delete-button {
+  opacity: 0.6;
 }

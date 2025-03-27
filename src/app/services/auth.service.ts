@@ -7,7 +7,7 @@ import {
   authState,
   user
 } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,8 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.currentUser$ as Observable<boolean>;
+    return this.currentUser$.pipe(
+      map(user => !!user)
+    );
   }
 } 

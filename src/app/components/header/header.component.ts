@@ -1,23 +1,39 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { MaterialModule } from '../../material/material.module';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MaterialModule, RouterLink],
+  imports: [MaterialModule, RouterLink, NgIf, AsyncPipe],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() public sideNavToggle = new EventEmitter();
-  
-  constructor() {}
-  
-  ngOnInit(): void {}
-  
+  @Output() sideNavToggle = new EventEmitter<void>();
+  isLoggedIn$!: Observable<boolean>;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.isLoggedIn$ = this.authService.isLoggedIn();
+  }
+
   onToggleSidenav() {
-    // Open and close side nav bar
     this.sideNavToggle.emit();
+  }
+
+  logout() {
+    this.authService.logout()
+      .then(() => {
+        this.router.navigate(['/login']);
+      })
+      .catch(error => console.error('Error al cerrar sesión:', error));
   }
 }
