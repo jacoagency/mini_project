@@ -5,6 +5,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
+import { ProductsComponent } from './components/products/products.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -14,14 +16,19 @@ export const routes: Routes = [
     component: TasksComponent, 
     canActivate: [authGuard] 
   },
-  { 
-    path: 'owner', 
-    component: TasksComponent,
-    canActivate: [authGuard] 
-  },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'invoice',
+    component: InvoiceComponent,
     canActivate: [authGuard]
   },
   { path: 'about', component: AboutComponent },

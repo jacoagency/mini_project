@@ -8,7 +8,7 @@
 <!-- Formulario oculto por defecto, se muestra cuando showForm es true -->
 <div class="task-form-container" *ngIf="showForm">
   <div class="task-form">
-    <form [formGroup]="addTaskForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addTaskForm" (ngSubmit)="addTask()">
       <div class="form-fields">
         <div class="form-field">
           <label>Task title</label>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="form-actions">
-        <button type="submit" class="save-task-button" (click)="addTask()" [disabled]="addTaskForm.invalid">Save task</button>
+        <button type="submit" class="save-task-button" [disabled]="addTaskForm.invalid">Save task</button>
       </div>
     </form>
   </div>

@@ -6,13 +6,18 @@
   
   <!-- Authenticated-only content -->
   <ng-container *ngIf="isLoggedIn$ | async">
-    <a mat-list-item routerLink="/owner" (click)="onClose()">
-      <mat-icon>assignment_ind</mat-icon>
+    <a mat-list-item routerLink="/invoice" (click)="onClose()">
+      <mat-icon>receipt</mat-icon>
       <span class="nav-caption">Invoices</span>
     </a>
-    <a mat-list-item routerLink="/tasks" (click)="onClose()">
-      <mat-icon>account_balance</mat-icon>
+    <a mat-list-item routerLink="/products" (click)="onClose()">
+      <mat-icon>shopping_cart</mat-icon>
       <span class="nav-caption">Add product</span>
+    </a>
+    
+    <a mat-list-item routerLink="/tasks" (click)="onClose()">
+      <mat-icon>assignment</mat-icon>
+      <span class="nav-caption">Tasks</span>
     </a>
     <mat-list-item [matMenuTriggerFor]="menu">
       <mat-icon>unfold_more</mat-icon>

@@ -1,0 +1,94 @@
+.invoice-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e9e9e9;
+  padding: 20px;
+}
+
+.invoice-card {
+  background-color: #e9e9e9;
+  width: 100%;
+  max-width: 350px;
+  padding: 30px 20px;
+  border-radius: 8px;
+}
+
+h2 {
+  font-size: 20px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.invoice-form {
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.coupon-input {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.apply-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.invoice-details {
+  margin-bottom: 30px;
+}
+
+.invoice-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.invoice-row.total {
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  margin-top: 10px;
+}
+
+.download-btn {
+  background-color: #8bc34a;
+  color: #333;
+  border: none;
+  padding: 10px 0;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+}

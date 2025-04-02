@@ -1,0 +1,39 @@
+<div class="invoice-container" *ngIf="order">
+  <div class="invoice-card">
+    <h2>Check your bill</h2>
+    
+    <div class="invoice-form">
+      <div class="form-group">
+        <label>Coupon</label>
+        <div class="coupon-input">
+          <input type="text" [(ngModel)]="couponCode" placeholder="Coupon">
+          <button class="apply-btn" (click)="applyCoupon()">Apply</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="invoice-details">
+      <div class="invoice-row">
+        <span>Subtotal</span>
+        <span>${{order.subtotal.toFixed(2)}}</span>
+      </div>
+      
+      <div class="invoice-row" *ngIf="order.discount > 0">
+        <span>Cupon discount</span>
+        <span>${{order.discount.toFixed(2)}}</span>
+      </div>
+      
+      <div class="invoice-row">
+        <span>Taxes</span>
+        <span>${{order.taxes.toFixed(2)}}</span>
+      </div>
+      
+      <div class="invoice-row total">
+        <span>Total</span>
+        <span>${{order.total.toFixed(2)}}</span>
+      </div>
+    </div>
+    
+    <button class="download-btn" (click)="downloadInvoice()">Download</button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="products-container">
+  <div class="drink-builder">
+    <h2>Build your drink!</h2>
+    
+    <div class="ingredient">
+      <label>Milk</label>
+      <div class="quantity-controls">
+        <button class="control-btn minus-btn" (click)="decreaseMilk()">−</button>
+        <input type="text" class="quantity-input" [value]="milkQuantity" readonly>
+        <button class="control-btn plus-btn" (click)="increaseMilk()">+</button>
+      </div>
+    </div>
+    
+    <div class="ingredient">
+      <label>Syrup</label>
+      <div class="quantity-controls">
+        <button class="control-btn minus-btn" (click)="decreaseSyrup()">−</button>
+        <input type="text" class="quantity-input" [value]="syrupQuantity" readonly>
+        <button class="control-btn plus-btn" (click)="increaseSyrup()">+</button>
+      </div>
+    </div>
+    
+    <div class="ingredient">
+      <label>Caffeine</label>
+      <div class="toggle-controls">
+        <button class="toggle-btn" [class.active]="caffeine" (click)="setCaffeine(true)">✓</button>
+        <button class="toggle-btn" [class.active]="!caffeine" (click)="setCaffeine(false)">×</button>
+      </div>
+    </div>
+    
+    <button class="confirm-btn" (click)="confirmOrder()">Confirm</button>
+  </div>
+</div>
