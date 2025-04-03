@@ -8,16 +8,7 @@
         </div>
     </div>
     <div class="middle-section">
-        <ul class="navigation-items">
-            <!-- Home siempre visible -->
-            
-            <!-- Tasks y About solo visibles cuando está autenticado -->
-            <ng-container *ngIf="isLoggedIn$ | async">
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/tasks">Tasks</a></li>
-                <li><a routerLink="/about">About</a></li>
-            </ng-container>
-        </ul>
+        <!-- Eliminamos la navegación de Home, Tasks y About -->
     </div>
     <div class="right-section">
         <!-- Mostrar estos botones si NO está autenticado -->

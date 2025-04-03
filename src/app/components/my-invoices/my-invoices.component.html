@@ -1,0 +1,71 @@
+<div class="container">
+  <h1>My Invoices</h1>
+  
+  <div *ngIf="loading" class="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Loading your invoices...</p>
+  </div>
+  
+  <div *ngIf="error" class="error-message">
+    <mat-icon>error</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-raised-button color="primary" (click)="loadOrders()">Try Again</button>
+  </div>
+  
+  <div *ngIf="!loading && !error">
+    <div *ngIf="orders.length > 0; else noOrders">
+      <table mat-table [dataSource]="orders" class="mat-elevation-z8 orders-table">
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let order"> {{ formatDate(order.createdAt) }} </td>
+        </ng-container>
+        
+        <!-- Order ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Order ID </th>
+          <td mat-cell *matCellDef="let order"> {{ order.id || 'N/A' }} </td>
+        </ng-container>
+        
+        <!-- Items Column -->
+        <ng-container matColumnDef="items">
+          <th mat-header-cell *matHeaderCellDef> Items </th>
+          <td mat-cell *matCellDef="let order">
+            Milk: {{ order.milk }} | Syrup: {{ order.syrup }} | Caffeine: {{ order.caffeine ? 'Yes' : 'No' }}
+          </td>
+        </ng-container>
+        
+        <!-- Total Column -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let order"> ${{ order.total.toFixed(2) }} </td>
+        </ng-container>
+        
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let order">
+            <button mat-icon-button color="primary" (click)="viewInvoiceDetails(order)" [routerLink]="['/invoice']">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="downloadInvoice(order)">
+              <mat-icon>download</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="['date', 'id', 'items', 'total', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['date', 'id', 'items', 'total', 'actions'];"></tr>
+      </table>
+    </div>
+    
+    <ng-template #noOrders>
+      <div class="no-orders">
+        <mat-icon>receipt</mat-icon>
+        <h3>No invoices found</h3>
+        <p>You don't have any orders yet. Start by creating one!</p>
+        <button mat-raised-button color="primary" routerLink="/products">Create an Order</button>
+      </div>
+    </ng-template>
+  </div>
+</div>

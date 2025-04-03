@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, doc, getDoc } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Firestore, collection, addDoc, doc, getDoc, query, where, getDocs, orderBy, Timestamp } from '@angular/fire/firestore';
+import { BehaviorSubject, Observable, from, firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 export interface Order {
   id?: string;
@@ -14,6 +15,7 @@ export interface Order {
   total: number;
   couponCode?: string | null;
   createdAt: Date;
+  userId?: string;
 }
 
 @Injectable({
@@ -25,7 +27,8 @@ export class OrderService {
 
   constructor(
     private firestore: Firestore,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   async createOrder(orderData: Partial<Order>): Promise<string> {
@@ -70,6 +73,12 @@ export class OrderService {
       console.log('Intentando guardar orden en Firebase:', order);
       console.log('Usando colección:', 'orders');
       console.log('Firestore inicializado:', this.firestore ? 'Sí' : 'No');
+      
+      // Obtener el ID del usuario actual
+      const user = await firstValueFrom(this.authService.getCurrentUser());
+      if (user) {
+        order.userId = user.uid;
+      }
       
       // Guardar en Firebase
       const ordersCollection = collection(this.firestore, 'orders');
@@ -127,5 +136,92 @@ export class OrderService {
       return 0.2; // 20% de descuento
     }
     return 0; // No hay descuento
+  }
+
+  async getAllOrders(): Promise<Order[]> {
+    try {
+      const ordersCollection = collection(this.firestore, 'orders');
+      // Solo ordenamos por fecha, sin filtrar por usuario
+      const q = query(
+        ordersCollection,
+        orderBy('createdAt', 'desc')
+      );
+      
+      const querySnapshot = await getDocs(q);
+      const orders: Order[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        // Convertir Timestamp a Date si es necesario
+        let createdAtDate: Date;
+        
+        if (data['createdAt'] && typeof (data['createdAt'] as Timestamp).toDate === 'function') {
+          createdAtDate = (data['createdAt'] as Timestamp).toDate();
+        } else {
+          createdAtDate = new Date(data['createdAt']);
+        }
+        
+        orders.push({
+          ...data as Omit<Order, 'createdAt'>,
+          id: doc.id,
+          createdAt: createdAtDate
+        });
+      });
+      
+      return orders;
+    } catch (error) {
+      console.error('Error al obtener todas las órdenes: ', error);
+      return [];
+    }
+  }
+
+  async getUserOrders(): Promise<Order[]> {
+    try {
+      const user = await firstValueFrom(this.authService.getCurrentUser());
+      if (!user) {
+        console.log('No hay usuario autenticado');
+        return [];
+      }
+      
+      console.log('Usuario autenticado:', user.uid);
+      console.log('Email del usuario:', user.email);
+
+      const ordersCollection = collection(this.firestore, 'orders');
+      const q = query(
+        ordersCollection, 
+        where('userId', '==', user.uid),
+        orderBy('createdAt', 'desc')
+      );
+      
+      console.log('Buscando órdenes para el usuario:', user.uid);
+      
+      const querySnapshot = await getDocs(q);
+      const orders: Order[] = [];
+      
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        // Convertir Timestamp a Date si es necesario
+        let createdAtDate: Date;
+        
+        if (data['createdAt'] && typeof (data['createdAt'] as Timestamp).toDate === 'function') {
+          createdAtDate = (data['createdAt'] as Timestamp).toDate();
+        } else {
+          createdAtDate = new Date(data['createdAt']);
+        }
+        
+        orders.push({
+          ...data as Omit<Order, 'createdAt'>,
+          id: doc.id,
+          createdAt: createdAtDate
+        });
+      });
+      
+      console.log(`Se encontraron ${orders.length} órdenes para el usuario ${user.uid}`);
+      
+      return orders;
+    } catch (error) {
+      console.error('Error al obtener las órdenes del usuario: ', error);
+      return [];
+    }
   }
 }
